@@ -1,22 +1,8 @@
 
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 
 import { Fragment, useState } from 'react'
@@ -24,13 +10,11 @@ import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
-  ShoppingBagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
-// const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
+
 const navigation = {
   categories: [
     {
@@ -95,24 +79,24 @@ const navigation = {
   ],
   pages: [
     { name: 'Wohnen', href: '#' },
-    { name: 'Vereine', href: '#' },
+    { name: 'Vereine', href: '/vereine' },
   ],
 }
 const categories = [
   {
     name: 'Lebensmittel',
     href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg',
+    imageSrc: "/feerd-category-groceries.jpg", //'https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg',
   },
   {
-    name: 'Einzelhandel',
+    name: 'Handwerker',
     href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-01-category-02.jpg',
+    imageSrc: 'https://images.unsplash.com/photo-1601598851547-4302969d0614?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1664&q=80',
   },
   {
-    name: 'Test',
+    name: 'Kleidung',
     href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-01-category-04.jpg',
+    imageSrc: 'https://images.unsplash.com/photo-1611858447060-7e516251cf4c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3928&q=80',
   },
   {
     name: 'Moep',
@@ -144,34 +128,6 @@ const collections = [
     description: 'Be more productive than enterprise project managers with a single piece of paper.',
   },
 ]
-const footerNavigation = {
-  shop: [
-    { name: 'Bags', href: '#' },
-    { name: 'Tees', href: '#' },
-    { name: 'Objects', href: '#' },
-    { name: 'Home Goods', href: '#' },
-    { name: 'Accessories', href: '#' },
-  ],
-  company: [
-    { name: 'Who we are', href: '#' },
-    { name: 'Sustainability', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Terms & Conditions', href: '#' },
-    { name: 'Privacy', href: '#' },
-  ],
-  account: [
-    { name: 'Manage Account', href: '#' },
-    { name: 'Returns & Exchanges', href: '#' },
-    { name: 'Redeem a Gift Card', href: '#' },
-  ],
-  connect: [
-    { name: 'Contact Us', href: '#' },
-    { name: 'Twitter', href: '#' },
-    { name: 'Instagram', href: '#' },
-    { name: 'Pinterest', href: '#' },
-  ],
-}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -179,8 +135,8 @@ function classNames(...classes) {
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  return (
+  
+    return (
     <div className="bg-white">
       {/* Mobile menu */}
       <Transition.Root show={mobileMenuOpen} as={Fragment}>
@@ -261,54 +217,6 @@ export default function Home() {
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-
-                {/* <div className="space-y-6 border-t border-gray-200 py-6 px-4">
-                  {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
-                        {page.name}
-                      </a>
-                    </div>
-                  ))}
-                </div> */}
-
-                {/* <div className="space-y-6 border-t border-gray-200 py-6 px-4">
-                  <div className="flow-root">
-                    <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                      Create an account
-                    </a>
-                  </div>
-                  <div className="flow-root">
-                    <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                      Sign Out
-                    </a>
-                  </div>
-                </div> */}
-
-                {/* <div className="space-y-6 border-t border-gray-200 py-6 px-4"> */}
-                  {/* Currency selector */}
-                  {/* <form>
-                    <div className="inline-block">
-                      <label htmlFor="mobile-currency" className="sr-only">
-                        Currency
-                      </label>
-                      <div className="group relative -ml-2 rounded-md border-transparent focus-within:ring-2 focus-within:ring-white">
-                        <select
-                          id="mobile-currency"
-                          name="currency"
-                          className="flex items-center rounded-md border-transparent bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-gray-700 focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-800"
-                        >
-                          {currencies.map((currency) => (
-                            <option key={currency}>{currency}</option>
-                          ))}
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-                          <ChevronDownIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
-                        </div>
-                      </div>
-                    </div>
-                  </form> */}
-                {/* </div> */}
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -471,7 +379,7 @@ export default function Home() {
 
                       {/* Search */}
                       <a href="#" className="ml-2 p-2 text-white">
-                        <span className="sr-only">Search</span>
+                        <span className="sr-only">Suche</span>
                         <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
                       </a>
                     </div>
@@ -534,10 +442,10 @@ export default function Home() {
         <section aria-labelledby="category-heading" className="pt-24 sm:pt-32 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
             <h2 id="category-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-              Nach Kategorien
+              Einkaufen in Fürth
             </h2>
             <a href="#" className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
-              Alle Kategorien anschauen
+              Alle Einkaufsmöglichkeiten anschauen
               <span aria-hidden="true"> &rarr;</span>
             </a>
           </div>
@@ -616,7 +524,7 @@ export default function Home() {
           className="mx-auto max-w-xl px-4 pt-24 sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8"
         >
           <h2 id="collection-heading" className="text-2xl font-bold tracking-tight text-gray-900">
-            Shop by Collection
+            Was gibt es neues in Fürth
           </h2>
           <p className="mt-4 text-base text-gray-500">
             Each season, we collaborate with world-class designers to create a collection inspired by the natural world.
@@ -673,98 +581,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <footer aria-labelledby="footer-heading" className="bg-gray-900">
-        <h2 id="footer-heading" className="sr-only">
-          Footer
-        </h2>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="py-20 xl:grid xl:grid-cols-3 xl:gap-8">
-            <div className="grid grid-cols-2 gap-8 xl:col-span-2">
-              <div className="space-y-12 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
-                <div>
-                  <h3 className="text-sm font-medium text-white">Shop</h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.shop.map((item) => (
-                      <li key={item.name} className="text-sm">
-                        <a href={item.href} className="text-gray-300 hover:text-white">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-white">Company</h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.company.map((item) => (
-                      <li key={item.name} className="text-sm">
-                        <a href={item.href} className="text-gray-300 hover:text-white">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="space-y-12 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
-                <div>
-                  <h3 className="text-sm font-medium text-white">Account</h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.account.map((item) => (
-                      <li key={item.name} className="text-sm">
-                        <a href={item.href} className="text-gray-300 hover:text-white">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-white">Connect</h3>
-                  <ul role="list" className="mt-6 space-y-6">
-                    {footerNavigation.connect.map((item) => (
-                      <li key={item.name} className="text-sm">
-                        <a href={item.href} className="text-gray-300 hover:text-white">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="mt-12 md:mt-16 xl:mt-0">
-              <h3 className="text-sm font-medium text-white">Anmeldung zum Newsletter</h3>
-              <p className="mt-6 text-sm text-gray-300">Bleiben Sie auf dem laufenden und verpassen keine Neuigkeiten mehr im Feerd</p>
-              <form className="mt-2 flex sm:max-w-md">
-                <label htmlFor="email-address" className="sr-only">
-                  Ihre Emailadresse
-                </label>
-                <input
-                  id="email-address"
-                  type="text"
-                  autoComplete="email"
-                  required
-                  className="w-full min-w-0 appearance-none rounded-md border border-white bg-white py-2 px-4 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900"
-                />
-                <div className="ml-4 flex-shrink-0">
-                  <button
-                    type="submit"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-                  >
-                    Anmelden
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 py-10">
-            <p className="text-sm text-gray-400">Copyright &copy; 2022 Sebastian Bachmann Softwareentwicklung</p>
-          </div>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   )
 }
